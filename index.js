@@ -40,41 +40,38 @@ const addManager = () => {
 
         team.push(manager);
 
-        console.log("Manager Added!");
+        console.log("==== Manager Added! ====");
 
-        addNewEmployee();
+        menu();
     })
 }
 
-//Prompt asking if there are additonal employees
-const addNewEmployee = () => {
+//Main Menu
+const menu = () => {
     return inquirer.prompt([
         {
             type: 'list',
-            name: 'addNewEmployee',
-            message: "Would you like to add additional employees to this team?",
-            choices: ['y', 'n'],
-        }
-    ]);
-};
-//NEEDS WORK
-if (addNewEmployee === 'y') {
-    newEmployeeRole();
-} else if (addNewEmployee === 'n') {
-    return team;
-};
-
-const newEmployeeRole = () => {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'employeeRole',
-            message: "What is your new team member's role?",
-            choices: ['Engineer', 'Intern']
+            name: 'menuList',
+            message: "Add another team member or finish building team.",
+            choices: ['Engineer', 'Intern', 'Finish']
         }
     ])
+    .then(answers => {
+        const userInput = answers.menuList;
+        switch(userInput) {
+            case "Engineer":
+                addEngineer();
+                break;
+            case "Intern":
+                addIntern();
+                break;
+            case "Finish":
+                finishHTML();
+                break;
+        }
+    })
 }
-//
+
 
 //Prompts for Engineer Employee
 const addEngineer = () => {
@@ -106,12 +103,13 @@ const addEngineer = () => {
 
         team.push(engineer);
 
-        console.log("Engineer Added!");
+        console.log("==== Engineer Added! ====");
 
-        addNewEmployee();
+        menu();
     })
 }
 
+//Prompt for Intern employee
 const addIntern = () => {
     return inquirer.prompt([
         {
@@ -141,9 +139,15 @@ const addIntern = () => {
 
         team.push(intern);
 
-        console.log("Intern Added!");
+        console.log("==== Intern Added! ====");
 
-        addNewEmployee();
+        menu();
     })
 }
+
+//Generate new HTML page using gathered data
+const finishHTML = () => {
+    console.log("==== Team Generated! Check out index.html! ====")
+}
+
 addManager();
