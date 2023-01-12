@@ -5,13 +5,14 @@ const generateCards = (team) => {
     const managerCard = (manager) => {
         return `
         <div class="card">
-            <div id="header">
-                <h4 id="name">${manager.name}</h4>
-                <p id="role">Manager</p>
+            <div id="top">
+                <h3 id="name">${manager.name}</h3>
+                <i class="fa-solid fa-mug-hot"></i>
+                <h3 id="role">Manager</h3>
             </div>
             <div class="container">
                 <p id="id">ID: ${manager.id}</p>
-                <p id="email">${manager.email}</p>
+                <p id="email"> <a href="mailto: ${manager.email}">${manager.email}</a></p>
                 <p id="other">Office Number: ${manager.officeNumber}</p>
             </div>
         </div>
@@ -22,13 +23,14 @@ const generateCards = (team) => {
     const engineerCard = (engineer) => {
         return `
         <div class="card">
-            <div id="header">
-                <h4 id="name">${engineer.name}</h4>
-                <p id="role">Engineer</p>
+            <div id="top">
+                <h3 id="name">${engineer.name}</h3>
+                <i class="fa-solid fa-glasses"></i>
+                <h3 id="role">Engineer</h3>
             </div>
             <div class="container">
                 <p id="id">ID: ${engineer.id}</p>
-                <p id="email">${engineer.email}</p>
+                <p id="email"> <a href="mailto: ${engineer.email}">${engineer.email}</a></p>
                 <p id="other">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></p>
             </div>
         </div>
@@ -39,13 +41,14 @@ const generateCards = (team) => {
     const internCard = (intern) => {
         return `
         <div class="card">
-            <div id="header">
-                <h4 id="name">${intern.name}</h4>
-                <p id="role">Intern</p>
+            <div id="top">
+                <h3 id="name">${intern.name}</h3>
+                <i class="fa-solid fa-user-graduate"></i>
+                <h3 id="role">Intern</h3>
             </div>
             <div class="container">
                 <p id="id">ID: ${intern.id}</p>
-                <p id="email">${intern.email}</p>
+                <p id="email"> <a href= "mailto: ${intern.email}">${intern.email}</a></p>
                 <p id="other">School: ${intern.school}</p>
             </div>
         </div>
@@ -71,6 +74,7 @@ const generatePage = (team) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>KS Team Profile Generator</title>
             <link rel="stylesheet" href="../dist/style.css"/>
+            <script src="https://kit.fontawesome.com/b12753f3df.js" crossorigin="anonymous"></script>
         </head>
 
         <body>
@@ -79,7 +83,7 @@ const generatePage = (team) => {
             </header>
 
             <main>
-                <div class="container">
+                <div class="allCards">
                     ${generateCards(team)}
                 </div>
             </main>

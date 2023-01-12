@@ -1,3 +1,4 @@
+
 header {
     text-align: center;
     padding: 15px;
@@ -7,11 +8,13 @@ header {
 
 .card {
     display: grid;
-    width: fit-content;
+    text-align: center;
+    width: 15%;
     margin: 10px;
+    border: 15px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    border: 15px;
+    
   }
 
 .card:hover {
@@ -23,7 +26,26 @@ header {
     color: black;
 }
 
-#header {
+#top {
     background-color: rgb(27, 176, 225);
     color: aliceblue;
+}
+
+.allCards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media  screen and (min-width: 450px) {
+  .card {
+      width: 35%;
+  }
+}
+
+@media screen and (min-width: 770px) {
+  .card {
+      width: 17%;
+
+  }
 }
