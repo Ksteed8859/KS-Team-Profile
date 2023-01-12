@@ -1,81 +1,66 @@
 
-//Create card for Manager Class
-const managerCard = (Manager) => {
-    return `
-    <div class="card">
-        <div id="header">
-            <h4 id="name">${Manager.name}</h4>
-            <p id="role">Manager</p>
+//Generate employee cards for all entered employees
+const generateCards = (team) => {
+    //Create card for Manager Class
+    const managerCard = (manager) => {
+        return `
+        <div class="card">
+            <div id="header">
+                <h4 id="name">${manager.name}</h4>
+                <p id="role">Manager</p>
+            </div>
+            <div class="container">
+                <p id="id">ID: ${manager.id}</p>
+                <p id="email">${manager.email}</p>
+                <p id="other">Office Number: ${manager.officeNumber}</p>
+            </div>
         </div>
-        <div class="container">
-            <p id="id">ID: ${Manager.id}</p>
-            <p id="email">${Manager.email}</p>
-            <p id="other">Office Number: ${Manager.officeNumber}</p>
-        </div>
-    </div>
-`;
-}
-
-//Create card for Engineer Class
-const engineerCard = (Engineer) => {
-    return `
-    <div class="card">
-        <div id="header">
-            <h4 id="name">${Engineer.name}</h4>
-            <p id="role">Engineer</p>
-        </div>
-        <div class="container">
-            <p id="id">ID: ${Engineer.id}</p>
-            <p id="email">${Engineer.email}</p>
-            <p id="other">Github: <a href="https://github.com/${Engineer.github}>${Engineer.github}</a></p>
-        </div>
-    </div>
-`;
-}
-
-//Create card for Intern Class
-const internCard = (Intern) => {
-    return `
-    <div class="card">
-        <div id="header">
-            <h4 id="name">${Intern.name}</h4>
-            <p id="role">Intern</p>
-        </div>
-        <div class="container">
-            <p id="id">ID: ${Intern.id}</p>
-            <p id="email">${Intern.email}</p>
-            <p id="other">School: ${Intern.school}</p>
-        </div>
-    </div>
-`;
-}
-
-generateHTML = () => {
-    cardsArray = [];
-    
-    for (let i = 0; i < cardsArray.length; i++) {
-        const employee = cardsArray[i];
-        const role = employee.getRole();
-
-        if (role === 'Manager') {
-            const createManager = managerCard(employee);
-            cardsArray.push(createManager);
-        } else if (role === 'Engineer') {
-            const createEngineer = engineerCard(employee);
-            cardsArray.push(createEngineer);
-        } else if (role === 'Intern') {
-            const createIntern = internCard(employee);
-            cardsArray.push(createIntern);
-        }  
+    `;
     }
 
-    const totalCards = cardsArray.join('');
+    //Create card for Engineer Class
+    const engineerCard = (engineer) => {
+        return `
+        <div class="card">
+            <div id="header">
+                <h4 id="name">${engineer.name}</h4>
+                <p id="role">Engineer</p>
+            </div>
+            <div class="container">
+                <p id="id">ID: ${engineer.id}</p>
+                <p id="email">${engineer.email}</p>
+                <p id="other">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></p>
+            </div>
+        </div>
+    `;
+    }
 
-    const generateTeam = generatePage(totalCards);
-    return generateTeam;
+    //Create card for Intern Class
+    const internCard = (intern) => {
+        return `
+        <div class="card">
+            <div id="header">
+                <h4 id="name">${intern.name}</h4>
+                <p id="role">Intern</p>
+            </div>
+            <div class="container">
+                <p id="id">ID: ${intern.id}</p>
+                <p id="email">${intern.email}</p>
+                <p id="other">School: ${intern.school}</p>
+            </div>
+        </div>
+    `;
+    }
+
+    cardsArray = [];
+    cardsArray.push(team.filter(employee => employee.getRole() === "Manager").map(manager => managerCard(manager)));
+    cardsArray.push(team.filter(employee => employee.getRole() === "Engineer").map(engineer => engineerCard(engineer)));
+    cardsArray.push(team.filter(employee => employee.getRole() === "Intern").map(intern => internCard(intern)));
+    
+   return cardsArray.join("");
+    
 }
-
-const generatePage = function (totalCards) {
+const generatePage = (team) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -95,7 +80,7 @@ const generatePage = function (totalCards) {
 
             <main>
                 <div class="container">
-                    ${totalCards}
+                    ${generateCards(team)}
                 </div>
             </main>
 
@@ -105,4 +90,4 @@ const generatePage = function (totalCards) {
     `;
 }
 
-module.exports = generateHTML;
+module.exports = generatePage;
