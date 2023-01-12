@@ -11,6 +11,7 @@ const Intern = require('./lib/Intern-Class');
 const team = [];
 
 //Prompt for Manager Employee
+
 const addManager = () => {
     return inquirer.prompt([
         {
@@ -34,9 +35,8 @@ const addManager = () => {
             message: "What is this manager's office number?",
         },
     ])
-    .then(managerData => {
-        const {name, id, email, officeNumber} = managerData;
-        const manager = new Manager (name, id, email, officeNumber);
+    .then((data) => {
+        const manager = new Manager (data.name, data.id, data.email, data.officeNumber);
 
         team.push(manager);
 
@@ -58,17 +58,14 @@ const menu = () => {
     ])
     .then(answers => {
         const userInput = answers.menuList;
-        switch(userInput) {
-            case "Engineer":
+        if (userInput === "Engineer") {
                 addEngineer();
-                break;
-            case "Intern":
+        } else if (userInput === "Intern") {
                 addIntern();
-                break;
-            case "Finish":
-                finishHTML();
-                break;
-        }
+        } else if (userInput === "Finish") {
+                fs.writeFile('./dist/index.html', generateHTML(team), (err) =>
+                err ? console.log(err) : console.log("==== Team Generated! Check out index.html! ===="))
+        };
     })
 }
 
@@ -97,9 +94,8 @@ const addEngineer = () => {
             message: "What is this engineer's github username?",
         },
     ])
-    .then(engineerData => {
-        const {name, id, email, github} = engineerData;
-        const engineer = new Engineer (name, id, email, github);
+    .then((data) => {
+        const engineer = new Engineer (data.name, data.id, data.email, data.github);
 
         team.push(engineer);
 
@@ -133,9 +129,8 @@ const addIntern = () => {
             message: "What is this intern's school called?",
         },
     ])
-    .then(internData => {
-        const {name, id, email, school} = internData;
-        const intern = new Intern (name, id, email, school);
+    .then((data) => {
+        const intern = new Intern (data.name, data.id, data.email, data.school);
 
         team.push(intern);
 
@@ -145,9 +140,5 @@ const addIntern = () => {
     })
 }
 
-//Generate new HTML page using gathered data
-const finishHTML = () => {
-    console.log("==== Team Generated! Check out index.html! ====")
-}
-
-addManager();
+//Call to initialize application
+addManager()
