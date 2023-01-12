@@ -11,7 +11,7 @@ const generateCards = (team) => {
             </div>
             <div class="container">
                 <p id="id">ID: ${manager.id}</p>
-                <p id="email">${manager.email}</p>
+                <p id="email"> <a href="mailto: ${manager.email}">${manager.email}</p>
                 <p id="other">Office Number: ${manager.officeNumber}</p>
             </div>
         </div>
@@ -28,7 +28,7 @@ const generateCards = (team) => {
             </div>
             <div class="container">
                 <p id="id">ID: ${engineer.id}</p>
-                <p id="email">${engineer.email}</p>
+                <p id="email"> <a href="mailto: ${engineer.email}">${engineer.email}</p>
                 <p id="other">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></p>
             </div>
         </div>
@@ -45,7 +45,7 @@ const generateCards = (team) => {
             </div>
             <div class="container">
                 <p id="id">ID: ${intern.id}</p>
-                <p id="email">${intern.email}</p>
+                <p id="email"> <a href= "mailto: ${intern.email}">${intern.email}</p>
                 <p id="other">School: ${intern.school}</p>
             </div>
         </div>
