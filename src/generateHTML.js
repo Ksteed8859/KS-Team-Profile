@@ -1,5 +1,6 @@
+
 //Create card for Manager Class
-const createManager = function (Manager) {
+const managerCard = (Manager) => {
     return `
     <div class="card">
         <div id="header">
@@ -16,7 +17,7 @@ const createManager = function (Manager) {
 }
 
 //Create card for Engineer Class
-const createEngineer = function (Engineer) {
+const engineerCard = (Engineer) => {
     return `
     <div class="card">
         <div id="header">
@@ -33,7 +34,7 @@ const createEngineer = function (Engineer) {
 }
 
 //Create card for Intern Class
-const createIntern = function (Intern) {
+const internCard = (Intern) => {
     return `
     <div class="card">
         <div id="header">
@@ -48,3 +49,60 @@ const createIntern = function (Intern) {
     </div>
 `;
 }
+
+generateHTML = () => {
+    cardsArray = [];
+    
+    for (let i = 0; i < cardsArray.length; i++) {
+        const employee = cardsArray[i];
+        const role = employee.getRole();
+
+        if (role === 'Manager') {
+            const createManager = managerCard(employee);
+            cardsArray.push(createManager);
+        } else if (role === 'Engineer') {
+            const createEngineer = engineerCard(employee);
+            cardsArray.push(createEngineer);
+        } else if (role === 'Intern') {
+            const createIntern = internCard(employee);
+            cardsArray.push(createIntern);
+        }  
+    }
+
+    const totalCards = cardsArray.join('');
+
+    const generateTeam = generatePage(totalCards);
+    return generateTeam;
+}
+
+const generatePage = function (totalCards) {
+    return `
+    <!DOCTYPE html>
+    <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>KS Team Profile Generator</title>
+            <link rel="stylesheet" href="../dist/style.css"/>
+        </head>
+
+        <body>
+            <header>
+                <h1>My Team</h1>
+            </header>
+
+            <main>
+                <div class="container">
+                    ${totalCards}
+                </div>
+            </main>
+
+            <script src="../index.js"></script>
+        </body>
+    </html>  
+    `;
+}
+
+module.exports = generateHTML;
